@@ -1,11 +1,19 @@
 <resources>
     <string name="app_name">TripRoom</string>
     <string name="title_activity_sign_up">SignUpActivity</string>
+    <string name="title_activity_home">HomeActivity</string>
     <string name="text_login">Login</string>
     <string name="text_continue">Please sign in to continue</string>
     <string name="input_email">E-mail</string>
     <string name="input_password">Password</string>
-    <string name="button_sign">SIGN IN</string>
+    <string name="text_signIn">Sign in</string>
     <string name="create_account">"Don't have an account? "</string>
     <string name="text_signUp">Sign up</string>
+    <string name="title_signUp">Sign Up</string>
+    <string name="new_account">Create a new account</string>
+    <string name="input_username">Username</string>
+    <string name="input_phone">Phone</string>
+    <string name="text_over">Over 18?</string>
+    <string name="button_account">CREATE ACCOUNT</string>
+    <string name="text_already">"Already have an account? "</string>
 </resources>
