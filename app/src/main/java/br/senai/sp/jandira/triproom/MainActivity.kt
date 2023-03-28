@@ -20,6 +20,8 @@ import androidx.compose.ui.text.toUpperCase
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import br.senai.sp.jandira.triproom.components.BottomShape
+import br.senai.sp.jandira.triproom.components.TopShape
 import br.senai.sp.jandira.triproom.ui.theme.TripRoomTheme
 
 class MainActivity : ComponentActivity() {
@@ -44,15 +46,7 @@ fun LoginScreen() {
             modifier = Modifier.fillMaxWidth(),
             horizontalArrangement = Arrangement.End
         ) {
-            Surface(
-                modifier = Modifier
-                    .width(120.dp)
-                    .height(40.dp),
-                color = Color(207, 6, 240, 255),
-                shape = RoundedCornerShape(bottomStart = 16.dp)
-            ) {
-
-            }
+            TopShape()
         }
         Column(
             modifier = Modifier
@@ -165,15 +159,7 @@ fun LoginScreen() {
             modifier = Modifier.fillMaxWidth(),
             verticalAlignment = Alignment.Bottom
         ) {
-            Surface(
-                modifier = Modifier
-                    .width(120.dp)
-                    .height(40.dp),
-                color = Color(207, 6, 240, 255),
-                shape = RoundedCornerShape(topEnd = 16.dp)
-            ) {
-
-            }
+            BottomShape()
         }
     }
 }
