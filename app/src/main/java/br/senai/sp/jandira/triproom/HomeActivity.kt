@@ -28,38 +28,6 @@ class HomeActivity : ComponentActivity() {
         setContent {
             TripRoomTheme {
                 HomeScreen()
-                Greeting(categories = CategoriesRepository.getCategoriesList())
-            }
-        }
-    }
-}
-
-@Composable
-fun Greeting(categories: List<Categorie>) {
-    Row(
-        modifier = Modifier.fillMaxWidth()
-    ) {
-        Card(
-            modifier = Modifier
-                .height(64.dp)
-                .width(109.dp),
-            backgroundColor = Color(207, 6, 240, 255)
-        ) {
-            Column(
-                modifier = Modifier.fillMaxSize(),
-                horizontalAlignment = Alignment.CenterHorizontally,
-                verticalArrangement = Arrangement.Center
-            ) {
-                Image(
-                    painter = painterResource(id = R.drawable.mountains),
-                    contentDescription = "",
-                    modifier = Modifier.size(32.dp)
-                )
-                Text(
-                    text = "Montain",
-                    fontSize = 14.sp,
-                    color = Color.White
-                )
             }
         }
     }

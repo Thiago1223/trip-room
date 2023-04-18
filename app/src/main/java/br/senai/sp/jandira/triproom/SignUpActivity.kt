@@ -1,11 +1,15 @@
 package br.senai.sp.jandira.triproom
 
 import android.content.Context
+import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
 import android.util.Log
 import android.widget.Toast
 import androidx.activity.ComponentActivity
+import androidx.activity.compose.rememberLauncherForActivityResult
 import androidx.activity.compose.setContent
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.compose.foundation.*
 import androidx.compose.foundation.gestures.scrollable
 import androidx.compose.foundation.layout.*
@@ -37,6 +41,8 @@ import br.senai.sp.jandira.triproom.components.TopShape
 import br.senai.sp.jandira.triproom.model.User
 import br.senai.sp.jandira.triproom.repository.UserRepository
 import br.senai.sp.jandira.triproom.ui.theme.TripRoomTheme
+import coil.compose.rememberAsyncImagePainter
+import coil.request.ImageRequest
 
 class SignUpActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -72,6 +78,23 @@ fun SignScreen() {
     var over18State by remember {
         mutableStateOf(false)
     }
+
+    // Obter foto da galeria de imagens
+    var photoUri by remember {
+        mutableStateOf<Uri?>(null)
+    }
+
+    // Criar o objeto que abrirá a galeria e retornará
+    // a Uri da imagem selecionada
+    val launcher = rememberLauncherForActivityResult(
+        contract = ActivityResultContracts.GetContent()
+    ){
+        photoUri = it
+    }
+
+    var painter = rememberAsyncImagePainter(
+        ImageRequest.Builder(LocalContext.current).data(photoUri).build()
+    )
 
     var context = LocalContext.current
 
@@ -123,10 +146,10 @@ fun SignScreen() {
                     )
                 ) {
                     Image(
-                        painter = painterResource(id = R.drawable.user),
+                        painter = painter,
                         contentDescription = null,
                         modifier = Modifier.size(16.dp),
-                        contentScale = ContentScale.None
+                        contentScale = ContentScale.Crop
                     )
                 }
                 Image(
@@ -136,6 +159,9 @@ fun SignScreen() {
                         .align(alignment = Alignment.BottomEnd)
                         .size(28.dp)
                         .offset(x = 4.dp, y = 2.dp)
+                        .clickable {
+                            launcher.launch("image/*")
+                        }
                 )
             }
             Column(
@@ -249,22 +275,29 @@ fun SignScreen() {
                     )
                 }
 
-                Spacer(modifier = Modifier.height(32.dp))
+                Spacer(modifier = Modifier.height(16.dp))
 
                 Column(
                     modifier = Modifier.fillMaxWidth(),
                     horizontalAlignment = Alignment.End
                 ) {
-                    Row() {
+                    Row(verticalAlignment = Alignment.CenterVertically) {
                         Text(
                             text = stringResource(R.string.text_already),
                             color = Color.Gray
                         )
-                        Text(
-                            text = stringResource(R.string.text_signIn),
-                            color = Color(207, 6, 240, 255),
-                            fontWeight = FontWeight.Bold
-                        )
+                        TextButton(
+                            onClick = {
+                                var openSign = Intent(context, MainActivity::class.java)
+                                context.startActivity(openSign)
+                            }
+                        ) {
+                            Text(
+                                text = stringResource(R.string.text_signIn),
+                                color = Color(207, 6, 240, 255),
+                                fontWeight = FontWeight.Bold
+                            )
+                        }
                     }
                 }
             }
