@@ -16,4 +16,5 @@
     <string name="text_over">Over 18?</string>
     <string name="button_account">CREATE ACCOUNT</string>
     <string name="text_already">"Already have an account? "</string>
+    <string name="text_categories">"Categories"</string>
 </resources>
